@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.android.bluetoothchat"
+    android:versionCode="1"
+    android:versionName="1.0">
+
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application
+        android:name=".ChatApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.Holo.Light.NoActionBar">
+
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".DeviceListActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/select_device"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.Dialog.NoActionBar"/>
+
+        <activity
+            android:name=".ExitActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/exit"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.Dialog.NoActionBar"/>
+
+        <activity
+            android:name=".ResetActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/resetTitle"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.Dialog.NoActionBar"/>
+
+        <activity
+            android:name=".WinnerActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/win"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.Dialog.NoActionBar"/>
+
+        <activity
+            android:name=".PlayerEditorActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/player_edit"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.Dialog.NoActionBar"/>
+
+        <activity
+            android:name=".RaceSelectionActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/race_selection"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar"/>
+
+    </application>
+
+</manifest>

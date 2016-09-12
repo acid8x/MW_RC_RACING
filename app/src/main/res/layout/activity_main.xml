@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/buttonReset"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_gravity="start"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button_selector"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:shadowColor="#111111"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="3"
+        android:text="@string/reset"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="normal|bold|italic"/>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="-10dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/logo"
+        />
+
+    <TextView
+        android:id="@+id/tvRaceType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="-15dp"
+        android:gravity="center_horizontal"
+        android:shadowColor="#111111"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="3"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="normal|bold|italic"/>
+
+    <ListView
+        android:id="@+id/in"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_weight="1"
+        android:stackFromBottom="false"
+        android:transcriptMode="alwaysScroll" />
+
+</LinearLayout>

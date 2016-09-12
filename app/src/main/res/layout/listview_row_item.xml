@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_selector"
+    android:orientation="horizontal"
+    android:padding="5dip" >
+ 
+    <!--  ListRow Left side Thumbnail image -->
+    <LinearLayout android:id="@+id/thumbnail"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_alignParentLeft="true"
+                  android:layout_marginRight="10dip"
+                  android:padding="3dip">
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="80dip"
+            android:layout_height="80dip"/>
+    </LinearLayout>
+  
+    <TextView
+        android:id="@+id/tvInfo1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/thumbnail"
+        android:layout_toRightOf="@+id/thumbnail"
+        android:text="Some text"
+        android:textColor="#040404"
+        android:textSize="26dip"
+        android:textStyle="bold"
+        android:typeface="sans"/>
+ 
+    <TextView
+        android:id="@+id/tvInfo2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvInfo1"
+        android:layout_marginTop="1dip"
+        android:layout_toRightOf="@+id/thumbnail"
+        android:textColor="#343434"
+        android:textSize="20dip"
+        android:textStyle="bold"/>
+
+</RelativeLayout>
+

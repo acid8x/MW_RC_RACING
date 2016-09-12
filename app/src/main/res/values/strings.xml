@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="app_name">MW RC RACING</string>
+
+    <!--  BluetoothChat -->
+    <string name="send">Send</string>
+    <string name="not_connected">You are not connected to a device</string>
+    <string name="bt_not_enabled_leaving">Bluetooth was not enabled. Leaving Bluetooth Chat.</string>
+    <string name="title_connecting">Connecting…</string>
+    <string name="title_connected_to">Connected to <xliff:g id="device_name">%1$s</xliff:g></string>
+    <string name="title_not_connected">Not connected</string>
+
+    <!--  DeviceListActivity -->
+    <string name="scanning">Scanning for devices…</string>
+    <string name="select_device">Select a device to connect</string>
+    <string name="none_paired">No devices have been paired</string>
+    <string name="none_found">No devices found</string>
+    <string name="title_other_devices">Other Available Devices</string>
+    <string name="button_scan">SCAN</string>
+
+    <!-- Options Menu -->
+    <string name="secure_connect">Connect a device - Secure</string>
+    <string name="insecure_connect">Connect a device - Insecure</string>
+    <string name="discoverable">Make discoverable</string>
+
+    <!-- Exit Menu -->
+    <string name="exit">Exit game ?</string>
+    <string name="buttonYes">YES</string>
+    <string name="buttonNo">NO</string>
+
+    <!-- Player Editor Menu -->
+    <string name="player_edit">Player editor</string>
+    <string name="ok">OK</string>
+    <string name="enterName">Name:</string>
+    <string name="r">Red</string>
+    <string name="g">Green</string>
+    <string name="b">Blue</string>
+    <string name="truck">Truck Color</string>
+
+    <!-- Race Selection Menu -->
+    <string name="race_selection">New race parameters</string>
+    <string name="r1">Race without guns</string>
+    <string name="r2">Race with guns activated</string>
+    <string name="r3">Search &amp; Destroy</string>
+    <string name="sb0">1</string>
+    <string name="sb10">10</string>
+    <string name="sb20">20</string>
+    <string name="sb30">30</string>
+    <string name="start">Start</string>
+
+    <string name="reset">RESET</string>
+    <string name="resetTitle">Are you sure you want to\nrestart a new game ?</string>
+    <string name="win">Winner !</string>
+
+</resources>
