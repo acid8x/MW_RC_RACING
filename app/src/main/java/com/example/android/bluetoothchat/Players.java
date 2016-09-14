@@ -123,16 +123,8 @@ public class Players implements Comparable<Players> {
 		this.truckColorB = truckColorB;
 	}
 
-	public boolean isTurboAvailable() {
-		return TurboAvailable;
-	}
-
 	public void setTurboAvailable(boolean turboAvailable) {
 		TurboAvailable = turboAvailable;
-	}
-
-	public boolean isGunAvailable() {
-		return GunAvailable;
 	}
 
 	public void setGunAvailable(boolean gunAvailable) {

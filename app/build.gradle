@@ -2,17 +2,19 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    buildToolsVersion "24.0.2"
     defaultConfig {
         applicationId 'com.meadewillis.mw_rc_racing'
         minSdkVersion 21
         targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
     }
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:24.2.0'
+    compile 'com.android.support:appcompat-v7:24.2.1'
     compile('io.socket:socket.io-client:0.7.0') {
         exclude group: 'org.json', module: 'json'
     }

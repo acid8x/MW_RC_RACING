@@ -6,7 +6,6 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -32,7 +31,6 @@ public class PlayerEditorActivity extends Activity {
             Green = bundle.getInt("GREEN");
             Blue = bundle.getInt("BLUE");
         }
-        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_player_editor);
 
         setResult(PlayerEditorActivity.RESULT_CANCELED);
