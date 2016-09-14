@@ -37,6 +37,9 @@ public class MainActivity extends FragmentActivity implements OnInitListener {
 
     static int raceType = 0;
     static boolean exitingState = false, winnerState = false;
+    private String[] winnerResults = new String[]{"","","","",""};
+    private int[] winnerArray = new int[]{-1,-1,-1,-1,-1};
+    private int currentWinner = 0, ttsID = 0;
     private static int raceLapsNumber = 2, raceGatesNumber = 4, raceKillsNumber = 10;
     private static int exitingActivity = -1;
     private static List<Players> list = new ArrayList<>();
@@ -196,6 +199,9 @@ public class MainActivity extends FragmentActivity implements OnInitListener {
         winnerState = false;
         mainFragment.attemptSend("clearGameStats", "");
         connectedTrucks = 0;
+        winnerArray = new int[]{-1,-1,-1,-1,-1};
+        winnerResults = new String[]{"","","","",""};
+        currentWinner = 0;
         list.clear();
         listView.setAdapter(new ConstructorListAdapter(ctx, com.example.android.bluetoothchat.R.layout.listview_row_item, list));
     }
@@ -248,6 +254,10 @@ public class MainActivity extends FragmentActivity implements OnInitListener {
                     String message = "";
                     message += node;
                     message += arg1;
+                    int otherId = updatePlayer(arg1);
+                    int cTotalGates = list.get(currentId).getTotalGates();
+                    int oTotalGates = list.get(otherId).getTotalGates();
+                    if (cTotalGates == oTotalGates && currentId > otherId) Collections.swap(list,currentId,otherId);
                     mainFragment.attemptSend("truckBack", message);
                     break;
                 case 'Z':
@@ -265,7 +275,9 @@ public class MainActivity extends FragmentActivity implements OnInitListener {
                         list.get(currentId).setTotalDeaths(updateTotalDeaths);
                         String updateTotalKillsSender = arg1 + "K1";
                         String ttsString = "Truck number " + node + " has been shot by Truck number " + arg1;
-                        tts.speak(ttsString, TextToSpeech.QUEUE_FLUSH, null);
+                        String UTTERANCE_ID = "";
+                        UTTERANCE_ID += ttsID++;
+                        tts.speak(ttsString, TextToSpeech.QUEUE_FLUSH, null, UTTERANCE_ID);
                         receivedData(updateTotalKillsSender);
                     }
                     break;
@@ -276,7 +288,9 @@ public class MainActivity extends FragmentActivity implements OnInitListener {
                         raceType = 0;
                         winnerState = true;
                         String winnerName = "Congratulations\n" + list.get(currentId).getName() + " #" + list.get(currentId).getId() + " win the battle !";
-                        tts.speak(winnerName, TextToSpeech.QUEUE_FLUSH, null);
+                        String UTTERANCE_ID = "";
+                        UTTERANCE_ID += ttsID++;
+                        tts.speak(winnerName, TextToSpeech.QUEUE_FLUSH, null, UTTERANCE_ID);
                         Intent intent = new Intent(MainActivity.this, WinnerActivity.class);
                         intent.putExtra("WINNER", winnerName);
                         startActivityForResult(intent, REQUEST_WINNER);
@@ -290,13 +304,28 @@ public class MainActivity extends FragmentActivity implements OnInitListener {
                         if (arg1 == mNextGate) {
                             if (arg1 == 1) list.get(currentId).setTotalLaps(mTotalLaps + 1);
                             if (mTotalLaps == (raceLapsNumber - 1) && mNextGate == 1) {
-                                String winnerName = "Congratulations\n" + list.get(currentId).getName() + " #" + list.get(currentId).getId() + " win the race !";
-                                tts.speak(winnerName, TextToSpeech.QUEUE_FLUSH, null);
-                                raceType = 0;
-                                winnerState = true;
-                                Intent intent = new Intent(MainActivity.this, WinnerActivity.class);
-                                intent.putExtra("WINNER", winnerName);
-                                startActivityForResult(intent, REQUEST_WINNER);
+                                winnerArray[currentWinner++] = currentId;
+                                String winnerName = "";
+                                if (currentWinner == 1) winnerName += "Congratulations\n" + list.get(currentId).getName() + " #" + list.get(currentId).getId() + " win the race !";
+                                else winnerName += list.get(currentId).getName() + " #" + list.get(currentId).getId() + " is in position number " + currentWinner;
+                                String UTTERANCE_ID = "";
+                                UTTERANCE_ID += ttsID++;
+                                tts.speak(winnerName, TextToSpeech.QUEUE_FLUSH, null, UTTERANCE_ID);
+                                if (currentWinner >= connectedTrucks) {
+                                    for (int i = 0; i < 5; i++) {
+                                        if (winnerArray[i] != -1) winnerResults[i] = list.get(winnerArray[i]).getName() + " #" + list.get(winnerArray[i]).getId();
+                                        else winnerResults[i] = "";
+                                    }
+                                    raceType = 0;
+                                    winnerState = true;
+                                    Intent intent = new Intent(MainActivity.this, WinnerActivity.class);
+                                    intent.putExtra("P1", winnerResults[0]);
+                                    intent.putExtra("P2", winnerResults[1]);
+                                    intent.putExtra("P3", winnerResults[2]);
+                                    intent.putExtra("P4", winnerResults[3]);
+                                    intent.putExtra("P5", winnerResults[4]);
+                                    startActivityForResult(intent, REQUEST_WINNER);
+                                }
                                 break;
                             }
                             if (mNextGate == raceGatesNumber) list.get(currentId).setNextGate(1);
@@ -307,7 +336,9 @@ public class MainActivity extends FragmentActivity implements OnInitListener {
                             mainFragment.attemptSend("gateUpdate", msg);
                             list.get(currentId).setTotalGates(mTotalGates + 1);
                             String ttsString = "Truck number " + node + " pass gate " + arg1;
-                            tts.speak(ttsString, TextToSpeech.QUEUE_FLUSH, null);
+                            String UTTERANCE_ID = "";
+                            UTTERANCE_ID += ttsID++;
+                            tts.speak(ttsString, TextToSpeech.QUEUE_FLUSH, null, UTTERANCE_ID);
                         }
                     }
                     break;
@@ -399,17 +430,23 @@ public class MainActivity extends FragmentActivity implements OnInitListener {
                     if (raceType == 1) {
                         rt.setText("RACE -NO- GUNS\n" + raceLapsNumber + " Laps with " + raceGatesNumber + " Gates");
                         String speechString = "Race " + raceLapsNumber + " laps, with " + raceGatesNumber + " gates per lap, without guns.";
-                        tts.speak(speechString, TextToSpeech.QUEUE_FLUSH, null);
+                        String UTTERANCE_ID = "";
+                        UTTERANCE_ID += ttsID++;
+                        tts.speak(speechString, TextToSpeech.QUEUE_FLUSH, null, UTTERANCE_ID);
                     }
                     if (raceType == 2) {
                         rt.setText("RACE WITH GUNS\n" + raceLapsNumber + " Laps with " + raceGatesNumber + " Gates");
                         String speechString = "Race " + raceLapsNumber + " laps, with " + raceGatesNumber + " gates per lap, with guns.";
-                        tts.speak(speechString, TextToSpeech.QUEUE_FLUSH, null);
+                        String UTTERANCE_ID = "";
+                        UTTERANCE_ID += ttsID++;
+                        tts.speak(speechString, TextToSpeech.QUEUE_FLUSH, null, UTTERANCE_ID);
                     }
                     if (raceType == 3) {
                         rt.setText("SEARCH & DESTROY\nFirst with " + raceKillsNumber + " Kills");
                         String speechString = "Battle game! First with " + raceKillsNumber + " kills, win the game.";
-                        tts.speak(speechString, TextToSpeech.QUEUE_FLUSH, null);
+                        String UTTERANCE_ID = "";
+                        UTTERANCE_ID += ttsID++;
+                        tts.speak(speechString, TextToSpeech.QUEUE_FLUSH, null, UTTERANCE_ID);
                     }
                     if (mChatService.getState() != BluetoothChatService.STATE_CONNECTED) {
                         Intent listIntent = new Intent(MainActivity.this, DeviceListActivity.class);

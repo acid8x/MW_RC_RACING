@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
-            android:layout_marginLeft="-10dp"
+            android:layout_marginStart="-10dp"
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:orientation="vertical">
@@ -92,8 +92,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="45dp"
-                    android:text="@string/sb0"
+                    android:text="@string/sb1"
                     android:textColor="#000000"
                     android:textSize="20sp"
                     android:textStyle="normal|bold|italic"
@@ -107,14 +106,11 @@
                     android:layout_weight="1"
                     android:max="19"
                     android:progressDrawable="@drawable/apptheme_scrubber_progress_horizontal_holo_light"
-                    android:scaleX="1.5"
-                    android:scaleY="1.5"
                     android:thumbTint="#33B5E5"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="45dp"
                     android:text="@string/sb20"
                     android:textColor="#000000"
                     android:textSize="20sp"
@@ -156,8 +152,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="45dp"
-                    android:text="@string/sb0"
+                    android:text="@string/sb2"
                     android:textColor="#000000"
                     android:textSize="20sp"
                     android:textStyle="normal|bold|italic"
@@ -169,16 +164,13 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:max="9"
+                    android:max="8"
                     android:progressDrawable="@drawable/apptheme_scrubber_progress_horizontal_holo_light"
-                    android:scaleX="1.5"
-                    android:scaleY="1.5"
                     android:thumbTint="#33B5E5"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="45dp"
                     android:text="@string/sb10"
                     android:textColor="#000000"
                     android:textSize="20sp"
@@ -220,8 +212,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="45dp"
-                    android:text="@string/sb0"
+                    android:text="@string/sb1"
                     android:textColor="#000000"
                     android:textSize="20sp"
                     android:textStyle="normal|bold|italic"
@@ -235,14 +226,11 @@
                     android:layout_weight="1"
                     android:max="29"
                     android:progressDrawable="@drawable/apptheme_scrubber_progress_horizontal_holo_light"
-                    android:scaleX="1.5"
-                    android:scaleY="1.5"
                     android:thumbTint="#33B5E5"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="45dp"
                     android:text="@string/sb30"
                     android:textColor="#000000"
                     android:textSize="20sp"

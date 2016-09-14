@@ -1,8 +1,6 @@
 package com.example.android.bluetoothchat;
 
-import org.json.JSONObject;
-
-import java.util.Iterator;
+import android.support.annotation.NonNull;
 
 public class Players implements Comparable<Players> {
 
@@ -34,26 +32,7 @@ public class Players implements Comparable<Players> {
 		this.GunAvailable = true;
 	}
 
-	public JSONObject json() {
-		JSONObject jsonObject = new JSONObject();
-
-		try {
-			jsonObject.put("id", this.id);
-			jsonObject.put("name", this.name);
-			jsonObject.put("totalGates", this.totalGates);
-			jsonObject.put("totalKills", this.totalKills);
-			jsonObject.put("totalDeaths", this.totalDeaths);
-			jsonObject.put("totalLaps", this.totalLaps);
-			jsonObject.put("nextGate", this.nextGate);
-			jsonObject.put("TurboAvailable", this.TurboAvailable);
-			jsonObject.put("GunAvailable", this.GunAvailable);
-		} catch (Exception e) {
-			// TODO: 0015 15/08/16
-		}
-		return jsonObject;
-	}
-
-	public int compareTo(Players other) { // RaceType: (1)Race (2)Race with guns (3)Guns only
+	public int compareTo(@NonNull Players other) { // RaceType: (1)Race (2)Race with guns (3)Guns only
 		if (MainActivity.raceType < 3) {
 			if (other.totalGates < this.totalGates) return -1;
 			if (other.totalGates > this.totalGates) return 1;
@@ -160,7 +139,7 @@ public class Players implements Comparable<Players> {
 		GunAvailable = gunAvailable;
 	}
 
-	public String getTruckInfo() {
+    public String getTruckInfo() {
 		String returnedString = id + "," + name + "," + totalGates + "," + totalKills + "," + totalDeaths + "," + totalLaps + "," + nextGate + ",";
 		if (TurboAvailable) returnedString += '1';
 		else returnedString += '0';

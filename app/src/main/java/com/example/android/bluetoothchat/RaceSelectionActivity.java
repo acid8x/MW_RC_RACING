@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -15,11 +14,9 @@ public class RaceSelectionActivity extends Activity {
 
     static int mRaceType = 0, mLaps = 0, mGates = 0, mKills = 0;
     static String sLaps = "How many laps ? -> ", sGates = "How many gates ? -> ", sKills = "How many kills ? -> ";
-    private SeekBar sbLaps, sbGates, sbKills;
     private LinearLayout llLaps, llGates, llKills;
     private TextView tvLaps, tvGates, tvKills;
     private RadioButton rb1, rb2, rb3;
-    private Button buttonStart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +28,6 @@ public class RaceSelectionActivity extends Activity {
             mGates = bundle.getInt("GATES");
             mKills = bundle.getInt("KILLS");
         }
-        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_race_selection);
 
         setResult(Activity.RESULT_CANCELED);
@@ -40,15 +36,19 @@ public class RaceSelectionActivity extends Activity {
     }
 
     private void createView() {
+        String temp;
         llLaps = (LinearLayout) findViewById(R.id.llLaps);
         llGates = (LinearLayout) findViewById(R.id.llGates);
         llKills = (LinearLayout) findViewById(R.id.llKills);
         tvLaps = (TextView) findViewById(R.id.tvLaps);
-        tvLaps.setText(sLaps + mLaps);
+        temp = sLaps + mLaps;
+        tvLaps.setText(temp);
         tvGates = (TextView) findViewById(R.id.tvGates);
-        tvGates.setText(sGates + mGates);
+        temp = sGates + mGates;
+        tvGates.setText(temp);
         tvKills = (TextView) findViewById(R.id.tvKills);
-        tvKills.setText(sKills + mKills);
+        temp = sKills + mKills;
+        tvKills.setText(temp);
         rb1 = (RadioButton) findViewById(R.id.radioButton);
         rb1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,13 +88,14 @@ public class RaceSelectionActivity extends Activity {
                 mRaceType = 3;
             }
         });
-        sbLaps = (SeekBar) findViewById(R.id.seekLaps);
+        SeekBar sbLaps = (SeekBar) findViewById(R.id.seekLaps);
         sbLaps.setProgress((mLaps - 1));
         sbLaps.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 mLaps = progress + 1;
-                tvLaps.setText(sLaps + mLaps);
+                String temp = sLaps + mLaps;
+                tvLaps.setText(temp);
             }
 
             @Override
@@ -107,13 +108,14 @@ public class RaceSelectionActivity extends Activity {
 
             }
         });
-        sbGates = (SeekBar) findViewById(R.id.seekGates);
+        SeekBar sbGates = (SeekBar) findViewById(R.id.seekGates);
         sbGates.setProgress((mGates - 1));
         sbGates.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                mGates = progress + 1;
-                tvGates.setText(sGates + mGates);
+                mGates = progress + 2;
+                String temp = sGates + mGates;
+                tvGates.setText(temp);
             }
 
             @Override
@@ -126,13 +128,14 @@ public class RaceSelectionActivity extends Activity {
 
             }
         });
-        sbKills = (SeekBar) findViewById(R.id.seekKills);
+        SeekBar sbKills = (SeekBar) findViewById(R.id.seekKills);
         sbKills.setProgress((mKills - 1));
         sbKills.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 mKills = progress + 1;
-                tvKills.setText(sKills + mKills);
+                String temp = sKills + mKills;
+                tvKills.setText(temp);
             }
 
             @Override
@@ -145,7 +148,7 @@ public class RaceSelectionActivity extends Activity {
 
             }
         });
-        buttonStart = (Button) findViewById(R.id.buttonStart);
+        Button buttonStart = (Button) findViewById(R.id.buttonStart);
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

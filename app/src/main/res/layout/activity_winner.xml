@@ -11,16 +11,165 @@
         android:layout_height="wrap_content"
         android:background="#666"
         android:gravity="center_horizontal"
-        android:padding="5dp"
+        android:padding="15dp"
         android:textAlignment="center"
         android:textAppearance="@android:style/TextAppearance.Material.Large"
-        android:textColor="#fff"/>
+        android:textColor="#fff"
+        android:textSize="28sp"
+        android:shadowColor="#ddd"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:text="@string/winner"/>
+
+    <LinearLayout
+        android:id="@+id/ll1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center">
+
+        <ImageView
+            android:contentDescription="@string/p1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:src="@drawable/gold"/>
+
+        <TextView
+            android:id="@+id/tvWinner1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/list_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:textColor="#000"
+            android:textSize="20sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center">
+
+        <ImageView
+            android:contentDescription="@string/p2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:src="@drawable/silver"/>
+
+        <TextView
+            android:id="@+id/tvWinner2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/list_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:textColor="#000"
+            android:textSize="20sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center">
+
+        <ImageView
+            android:contentDescription="@string/p3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:src="@drawable/bronze"/>
+
+        <TextView
+            android:id="@+id/tvWinner3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/list_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:textColor="#000"
+            android:textSize="20sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/p4"
+            android:textSize="28sp"/>
+
+        <TextView
+            android:id="@+id/tvWinner4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/list_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:textColor="#000"
+            android:textSize="20sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/p5"
+            android:textSize="28sp"/>
+
+        <TextView
+            android:id="@+id/tvWinner5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/list_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:textColor="#000"
+            android:textSize="20sp"/>
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/buttonOk"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="50dp"
         android:background="@drawable/button_selector"
         android:padding="-8dp"
         android:shadowColor="#111111"
@@ -30,7 +179,11 @@
         android:text="@string/ok"
         android:textColor="#000000"
         android:textSize="20sp"
-        android:textStyle="normal|bold|italic"/>
+        android:textStyle="normal|bold|italic"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="25dp" />
 
 
 </LinearLayout>
