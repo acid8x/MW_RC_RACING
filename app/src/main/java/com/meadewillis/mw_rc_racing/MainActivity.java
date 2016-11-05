@@ -246,6 +246,8 @@ public class MainActivity extends FragmentActivity implements OnInitListener {
         list.get(currentId).setLastReception(System.currentTimeMillis());
         if (currentId != -1 && valid && !winnerState) {
             switch (command) {
+                case '@':
+                    break;
                 case 'P':
                     int otherId = updatePlayer(arg1);
                     int cTotalGates = list.get(currentId).getTotalGates();
