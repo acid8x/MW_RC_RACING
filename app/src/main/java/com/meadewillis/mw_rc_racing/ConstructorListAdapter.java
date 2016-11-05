@@ -1,7 +1,6 @@
 package com.meadewillis.mw_rc_racing;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
@@ -36,9 +35,9 @@ class ConstructorListAdapter extends ArrayAdapter<Players> {
 		legendBorn.setText("NextGate: " + Legend.getNextGate() + " Laps: " + Legend.getTotalLaps() + "\nKills: " + Legend.getTotalKills() + " Deaths: " + Legend.getTotalDeaths());
 
 		ImageView legendImage = (ImageView) convertView.findViewById(R.id.imageView1);
-        legendImage.setColorFilter(Color.rgb(Legend.getTruckColorR(), Legend.getTruckColorG(), Legend.getTruckColorB()));
-        String uri = "drawable/image1";
-        int imageResource = context.getResources().getIdentifier(uri, null, context.getPackageName());
+		//legendImage.setColorFilter(Color.rgb(Legend.getTruckColorR(), Legend.getTruckColorG(), Legend.getTruckColorB()));
+		String uri = "drawable/image" + Legend.getId();
+		int imageResource = context.getResources().getIdentifier(uri, null, context.getPackageName());
 		Drawable image = context.getDrawable(imageResource);
         legendImage.setImageDrawable(image);
 

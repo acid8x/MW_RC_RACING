@@ -36,12 +36,13 @@ public class MainActivity extends FragmentActivity implements OnInitListener {
 
     static int raceType = 0;
     static boolean exitingState = false, winnerState = false;
-    private String[] winnerResults = new String[]{"","","","",""};
-    private int[] winnerArray = new int[]{-1,-1,-1,-1,-1};
-    private int currentWinner = 0, ttsID = 0;
     private static int raceLapsNumber = 2, raceGatesNumber = 4, raceKillsNumber = 10;
     private static int exitingActivity = -1;
     private static List<Players> list = new ArrayList<>();
+    private String[] winnerResults = new String[]{"","","","",""};
+    private int[] winnerArray = new int[]{-1,-1,-1,-1,-1};
+    private boolean[] removeId = {false, false, false, false, false};
+    private int currentWinner = 0, ttsID = 0;
     private TextToSpeech tts;
     private ListView listView = null;
     private Context ctx = null;
@@ -200,6 +201,10 @@ public class MainActivity extends FragmentActivity implements OnInitListener {
     private int updatePlayer(int id) {
         int returnedId = -1;
         for (int i = 0; i < list.size(); i++) {
+            long lastRecept = list.get(i).getLastReception();
+            if (lastRecept != -1 && (lastRecept + 10000) < System.currentTimeMillis()) {
+                removeId[i] = true;
+            }
             int getId = list.get(i).getId();
             if (id == getId) {
                 returnedId = i;
@@ -238,6 +243,7 @@ public class MainActivity extends FragmentActivity implements OnInitListener {
         if (raceType == 3 && command == 'G') valid = false;
         boolean boolArg1 = arg1 == 1;
         int currentId = updatePlayer(node);
+        list.get(currentId).setLastReception(System.currentTimeMillis());
         if (currentId != -1 && valid && !winnerState) {
             switch (command) {
                 case 'P':
@@ -261,17 +267,24 @@ public class MainActivity extends FragmentActivity implements OnInitListener {
                         int updateTotalDeaths = list.get(currentId).getTotalDeaths() + 1;
                         list.get(currentId).setTotalDeaths(updateTotalDeaths);
                         String updateTotalKillsSender = arg1 + "K1";
-                        String ttsString = "Truck number " + node + " has been shot by Truck number " + arg1;
+                        String ttsString = "Truck " + arg1 + " kill Truck " + node;
                         String UTTERANCE_ID = "";
                         UTTERANCE_ID += ttsID++;
-                        tts.speak(ttsString, TextToSpeech.QUEUE_FLUSH, null, UTTERANCE_ID);
+                        tts.speak(ttsString, TextToSpeech.QUEUE_ADD, null, UTTERANCE_ID);
                         receivedData(updateTotalKillsSender);
                     }
                     break;
                 case 'K':
+                    boolean k_ok = true;
+                    for (int i : winnerArray) {
+                        if (i == currentId) {
+                            k_ok = false;
+                            break;
+                        }
+                    }
                     int updateTotalKills = list.get(currentId).getTotalKills() + 1;
                     list.get(currentId).setTotalKills(updateTotalKills);
-                    if (raceType == 3 && updateTotalKills == raceKillsNumber) {
+                    if (k_ok && raceType == 3 && updateTotalKills == raceKillsNumber) {
                         raceType = 0;
                         winnerState = true;
                         String winnerName = "Congratulations\n" + list.get(currentId).getName() + " #" + list.get(currentId).getId() + " win the battle !";
@@ -284,7 +297,14 @@ public class MainActivity extends FragmentActivity implements OnInitListener {
                     }
                     break;
                 case 'G':
-                    if (raceType < 3) {
+                    boolean g_ok = true;
+                    for (int i : winnerArray) {
+                        if (i == currentId) {
+                            g_ok = false;
+                            break;
+                        }
+                    }
+                    if (g_ok && raceType < 3) {
                         int mNextGate = list.get(currentId).getNextGate();
                         int mTotalGates = list.get(currentId).getTotalGates();
                         int mTotalLaps = list.get(currentId).getTotalLaps();
@@ -296,7 +316,7 @@ public class MainActivity extends FragmentActivity implements OnInitListener {
                                 if (currentWinner == 1)
                                     winnerName += "Congratulations\n" + list.get(currentId).getName() + " #" + list.get(currentId).getId() + " win the race !";
                                 else
-                                    winnerName += list.get(currentId).getName() + " #" + list.get(currentId).getId() + " is in position number " + currentWinner;
+                                    winnerName += list.get(currentId).getName() + " #" + list.get(currentId).getId() + " finish in position number " + currentWinner;
                                 String UTTERANCE_ID = "";
                                 UTTERANCE_ID += ttsID++;
                                 tts.speak(winnerName, TextToSpeech.QUEUE_FLUSH, null, UTTERANCE_ID);
@@ -321,13 +341,19 @@ public class MainActivity extends FragmentActivity implements OnInitListener {
                             if (mNextGate == raceGatesNumber) list.get(currentId).setNextGate(1);
                             else list.get(currentId).setNextGate(mNextGate + 1);
                             list.get(currentId).setTotalGates(mTotalGates + 1);
-                            String ttsString = "Truck number " + node + " pass gate " + arg1;
+                            String ttsString = "Truck " + node + " pass " + arg1;
                             String UTTERANCE_ID = "";
                             UTTERANCE_ID += ttsID++;
-                            tts.speak(ttsString, TextToSpeech.QUEUE_FLUSH, null, UTTERANCE_ID);
+                            tts.speak(ttsString, TextToSpeech.QUEUE_ADD, null, UTTERANCE_ID);
                         }
                     }
                     break;
+            }
+            for (int i = 0; i < 5; i++) {
+                if (removeId[i]) {
+                    list.remove(i);
+                    removeId[i] = false;
+                }
             }
             Collections.sort(list);
             listView.setAdapter(new ConstructorListAdapter(ctx, R.layout.listview_row_item, list));

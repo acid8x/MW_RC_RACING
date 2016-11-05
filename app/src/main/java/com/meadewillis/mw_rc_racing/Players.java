@@ -14,6 +14,7 @@ public class Players implements Comparable<Players> {
 	private int truckColorR;
 	private int truckColorG;
 	private int truckColorB;
+	private long lastReception;
 	private boolean TurboAvailable;
 	private boolean GunAvailable;
 
@@ -28,6 +29,7 @@ public class Players implements Comparable<Players> {
 		this.truckColorR = 0;
 		this.truckColorG = 0;
 		this.truckColorB = 0;
+		this.lastReception = -1;
 		this.TurboAvailable = true;
 		this.GunAvailable = true;
 	}
@@ -123,8 +125,16 @@ public class Players implements Comparable<Players> {
 		this.truckColorB = truckColorB;
 	}
 
-    public boolean isTurboAvailable() {
-        return TurboAvailable;
+	public long getLastReception() {
+		return lastReception;
+	}
+
+	public void setLastReception(long lastReception) {
+		this.lastReception = lastReception;
+	}
+
+	public boolean isTurboAvailable() {
+		return TurboAvailable;
     }
 
     public void setTurboAvailable(boolean turboAvailable) {
